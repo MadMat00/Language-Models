@@ -34,7 +34,7 @@ def create_dictionary(text):
             else:
                 dictionary[words[i]][words[i+1]] += 1
     #saves the dictionary in a json file
-    with open('prova\\dict.json', 'w') as fp:
+    with open('Next Word Predictor\\dict.json', 'w') as fp:
         json.dump(dictionary, fp, indent=4)
 
 
@@ -48,11 +48,20 @@ def predict_next_word(dictionary, word):
         return next_word
     else:
         return None
+#new predict next word function that returns a list of the next words and their probability
+def predict_next_word_list(dictionary, word):
+    if word in dictionary:
+        next_words = dictionary[word]
+        next_word = max(next_words, key=next_words.get)
+        return next_word
+    else:
+        return None
     
-text = read_file('prova\\text.txt')
+    
+text = read_file('Next Word Predictor\\text.txt')
 dictionary = create_dictionary(text)
 
-print(predict_next_word(dictionary, 'cursus'))
+print(predict_next_word_list(dictionary, 'cursus'))
 
 
 
